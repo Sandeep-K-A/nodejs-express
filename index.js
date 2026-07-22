@@ -1,25 +1,13 @@
+require("dotenv").config();
 const express = require("express");
+const connectDB = require("./config/db");
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 const app = express();
 
-app.get("/", (req, res) => {
-  res.send("Hello from HomePage.");
-});
+app.use(express.json());
 
-app.get("/about", (req, res) => {
-  res.send("Hello from AboutPage.");
-});
-app.get("/users", (req, res) => {
-  res.json({
-    id: "1",
-    name: "sandeep",
-  });
-});
-
-app.get("/contacts", (req, res) => {
-  res.send("Hello from ContactsPage.");
-});
+connectDB();
 
 app.listen(PORT, () => {
   console.log(`server running in port ${PORT}...`);
